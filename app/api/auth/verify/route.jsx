@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 
 import connectDB from "lib/mongodb"
 import Agent from "models/agent"
-import Admin from "models/Admin"
+import Admin from "models/admin"
 
 export async function POST(request) {
   try {

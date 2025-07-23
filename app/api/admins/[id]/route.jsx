@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 import connectDB from "lib/mongodb"
-import Admin from "models/Admin"
+import Admin from "models/admin"
 
 export async function GET(request, { params }) {
   try {
