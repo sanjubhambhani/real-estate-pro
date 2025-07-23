@@ -4,7 +4,22 @@ import jwt from "jsonwebtoken"
 import connectDB from "../../../lib/mongodb"
 import Admin from "../../../models/Admin"
 
-const JWT_SECRET = "tmp" // TODO: migrate.
+import getConfig from "next/config"
+const { serverRuntimeConfig } = getConfig()
+const { JWT_SECRET } = serverRuntimeConfig
+
+export async function GET() {
+  try {
+    await connectDB()
+    const admins = await Admin.find()
+    return NextResponse.json(admins, { status: 201 })
+  } catch (err) {
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    )
+  }
+}
 
 export async function POST(request) {
   try {

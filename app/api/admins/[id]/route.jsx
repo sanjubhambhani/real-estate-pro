@@ -20,3 +20,25 @@ export async function GET(request, { params }) {
     )
   }
 }
+
+export async function PATCH(request, { params }) {
+  try {
+    await connectDB()
+    const { id } = await params
+    const admin = await Admin.findOne({ _id: id })
+    if (!admin)
+      return NextResponse.json({ message: "Admin not found" }, { status: 404 })
+
+    const data = await request.json()
+    await admin.updateOne(data)
+
+    return new Response(JSON.stringify(await ADmin.findOne({ _id: id })), {
+      headers: { "content-type": "application/json" },
+    })
+  } catch (err) {
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    )
+  }
+}
