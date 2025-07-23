@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
-import connectDB from "../../../../lib/mongodb"
-import Agent from "../../../../models/agent"
+import connectDB from "lib/mongodb"
+import Agent from "models/agent"
 
 export async function GET(request, { params }) {
   try {

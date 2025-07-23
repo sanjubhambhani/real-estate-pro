@@ -1,4 +1,4 @@
-import { getLeads } from "../../../lib/notion"
+import { getLeads } from "lib/notion"
 
 export async function GET(request) {
   const response = await getLeads()

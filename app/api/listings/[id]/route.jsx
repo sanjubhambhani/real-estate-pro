@@ -1,4 +1,4 @@
-import { getPage } from "../../../../lib/notion"
+import { getPage } from "lib/notion"
 
 export async function GET(request, { params }) {
   const { id } = await params

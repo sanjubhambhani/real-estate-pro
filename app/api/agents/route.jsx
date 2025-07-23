@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
 
-import connectDB from "../../../lib/mongodb"
-import Agent from "../../../models/agent"
+import connectDB from "lib/mongodb"
+import Agent from "models/agent"
 
 import getConfig from "next/config"
 const { serverRuntimeConfig } = getConfig()

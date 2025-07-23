@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, Row, Col } from "react-bootstrap"
-import { getPropertyValue } from "../../lib/notion"
+import { getPropertyValue } from "lib/notion"
 
 import { ButtonGroup, Button, Badge } from "react-bootstrap"
 

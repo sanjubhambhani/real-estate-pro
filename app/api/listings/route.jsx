@@ -1,4 +1,4 @@
-import { getListings } from "../../../lib/notion"
+import { getListings } from "lib/notion"
 
 const filterStatus = {
   property: "Status",
