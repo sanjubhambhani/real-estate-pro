@@ -10,4 +10,5 @@ const AdminsSchema = new mongoose.Schema({
   created: { type: Date, default: Date.now },
 })
 
-export default mongoose.models.Admin || mongoose.model("Admin", AdminsSchema)
+const Admin = mongoose.models.Admin || mongoose.model("Admin", AdminsSchema)
+export default Admin

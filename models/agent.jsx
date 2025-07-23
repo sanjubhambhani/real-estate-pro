@@ -10,4 +10,5 @@ const AgentsSchema = new mongoose.Schema({
   created: { type: Date, default: Date.now },
 })
 
-export default mongoose.models.Agent || mongoose.model("Agent", AgentsSchema)
+const Agent = mongoose.models.Agent || mongoose.model("Agent", AgentsSchema)
+export default Agent
