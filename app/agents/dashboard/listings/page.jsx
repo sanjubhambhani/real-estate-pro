@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Container, Row, Col } from "react-bootstrap"
 
-import ListingFeed from "../../../../components/listings/feed.jsx"
+import ListingFeed from "components/listings/feed.jsx"
 
 export default function Listings() {
   const [isLoading, setIsLoading] = useState(true)

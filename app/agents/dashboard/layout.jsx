@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap"
-import NavBar from "../../../components/agents/nav"
+import NavBar from "components/agents/nav"
 
 export default function DashboardLayout({ children }) {
   return (
