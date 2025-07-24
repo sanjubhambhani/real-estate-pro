@@ -21,7 +21,7 @@ export default function LeadForm({ onSubmit, defaultValues }) {
           <Form.Control
             type="name"
             placeholder="Full Name"
-            {...register("name", { required: false })}
+            {...register("name", { required: true })}
           />
         </InputGroup>
       </Form.Group>
@@ -31,7 +31,7 @@ export default function LeadForm({ onSubmit, defaultValues }) {
           <Form.Control
             type="email"
             placeholder="Email Address"
-            {...register("email", { required: false })}
+            {...register("email", { required: true })}
           />
         </InputGroup>
       </Form.Group>
@@ -41,7 +41,7 @@ export default function LeadForm({ onSubmit, defaultValues }) {
           <Form.Control
             type="phone"
             placeholder="Phone Number"
-            {...register("phone", { required: false })}
+            {...register("phone", { required: true })}
           />
         </InputGroup>
       </Form.Group>
