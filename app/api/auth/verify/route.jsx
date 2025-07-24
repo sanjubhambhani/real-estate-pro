@@ -22,7 +22,10 @@ export async function POST(request) {
       return decoded
     })
     if (!token)
-      return NextResponse.json({ message: "Invalid token" }, { status: 401 })
+      return NextResponse.json(
+        { message: "Invalid OTP, please try again." },
+        { status: 401 }
+      )
 
     let user = null
     switch (token.collection) {

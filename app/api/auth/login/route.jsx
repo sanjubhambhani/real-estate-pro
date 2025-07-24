@@ -21,7 +21,7 @@ export async function POST(request) {
       )
     if (!email)
       return NextResponse.json(
-        { message: "Email is required" },
+        { message: "Email address is required" },
         { status: 400 }
       )
 
