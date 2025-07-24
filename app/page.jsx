@@ -37,13 +37,13 @@ export default function AgentLogin() {
       data: values,
     })
       .then((res) => {
-        setLoading(false)
         if (res.status === 200) {
           const { user, collection } = res.data
           store.set("token", user.token)
           if (collection == "agents") router.push("/dashboard")
           if (collection == "admins") router.push("/admin")
         } else {
+          setLoading(false)
           setMsgError(
             (res && res.data && res.data.message) ||
               "Something went wrong, please try again!"
