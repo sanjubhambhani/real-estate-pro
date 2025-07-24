@@ -24,7 +24,6 @@ export async function GET() {
 export async function POST(request) {
   try {
     await connectDB()
-
     const { name, email } = await request.json()
     if (!email)
       return NextResponse.json({ message: "Email Required" }, { status: 400 })

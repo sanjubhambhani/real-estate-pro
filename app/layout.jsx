@@ -1,6 +1,6 @@
 import "./globals.scss"
 
-export default function RootLayout({ children }) {
+export default function AppLayout({ children }) {
   return (
     <html>
       <body>{children}</body>

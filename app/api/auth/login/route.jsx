@@ -46,7 +46,7 @@ export async function POST(request) {
     await user.updateOne({ otp })
 
     // TODO: Email Notification: Agent Dashboard Login Link
-    console.log("MagicLink: ", `http://localhost:3000/auth/verify/${otp}`)
+    console.log("MagicLink: ", `http://localhost:3000/?otp=${otp}`)
 
     return NextResponse.json(
       { message: "OTP sent successfully" },

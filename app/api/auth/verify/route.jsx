@@ -5,6 +5,10 @@ import connectDB from "lib/mongodb"
 import Agent from "models/agent"
 import Admin from "models/admin"
 
+import getConfig from "next/config"
+const { serverRuntimeConfig } = getConfig()
+const { JWT_SECRET } = serverRuntimeConfig
+
 export async function POST(request) {
   try {
     await connectDB()

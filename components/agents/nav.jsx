@@ -13,18 +13,16 @@ function BasicExample() {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="me-auto">
-            <Nav.Link href="/agents/dashboard">Dashboard</Nav.Link>
-            <Nav.Link href="/agents/dashboard/listings">Listings</Nav.Link>
-            <Nav.Link href="/agents/dashboard/leads">Leads</Nav.Link>
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/dashboard/listings">Listings</Nav.Link>
+            <Nav.Link href="/dashboard/leads">Leads</Nav.Link>
           </Nav>
           <Nav>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/agents/dashboard/profile">
+              <NavDropdown.Item href="#/dashboard/profile">
                 Profile
               </NavDropdown.Item>
-              <NavDropdown.Item href="/auth/logout?user=agent">
-                Log Out
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#TODO">Log Out</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
