@@ -39,8 +39,9 @@ export async function POST(request) {
     const agent = await new Agent(payload).save()
 
     const token = jwt.sign(
-      { collection: "agents", id: agent._id.toString() },
-      JWT_SECRET
+      { collection: "agents", id: agent._id.toString(), role: "token" },
+      JWT_SECRET,
+      { algorithm: "HS256" }
     )
     await agent.updateOne({ token })
 

@@ -9,7 +9,7 @@ function BasicExample() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
       <Container>
-        <Navbar.Brand href="#home">RealEstatePro</Navbar.Brand>
+        <Navbar.Brand href="/dashboard">RealEstatePro</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="me-auto">

@@ -1,9 +1,12 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 import { useState, useEffect } from "react"
 import { Container, Row, Col, Card, Alert } from "react-bootstrap"
 import axios from "axios"
+import store from "store"
 
 import LoginForm from "components/login/form.jsx"
 import LoginSuccess from "components/login/success.jsx"
@@ -11,12 +14,16 @@ import LoginSuccess from "components/login/success.jsx"
 export default function AgentLogin() {
   const [loading, setLoading] = useState(true)
   const [email, setEmail] = useState(null)
+  const [collection, setCollection] = useState("agents")
+
   const [msgSuccess, setMsgSuccess] = useState(null)
   const [msgError, setMsgError] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     if (params.get("email")) setEmail(params.get("email"))
+    if (params.get("collection")) setCollection(params.get("collection"))
 
     const otp = params.get("otp")
     if (otp) submitToken({ otp })
@@ -31,10 +38,17 @@ export default function AgentLogin() {
     })
       .then((res) => {
         setLoading(false)
-        console.log(res.data)
-        // if (res.status === 200) setSubmitted(true)
-        // TODO: save token, redirect to dashboard.
-        console.log("redirect to dashboard")
+        if (res.status === 200) {
+          const { user, collection } = res.data
+          store.set("token", user.token)
+          if (collection == "agents") router.push("/dashboard")
+          if (collection == "admins") router.push("/admin")
+        } else {
+          setMsgError(
+            (res && res.data && res.data.message) ||
+              "Something went wrong, please try again!"
+          )
+        }
       })
       .catch((err) => {
         setLoading(false)
@@ -50,14 +64,13 @@ export default function AgentLogin() {
 
   const submitEmail = (values) => {
     setLoading(true)
-    values.collection = "agents"
+    values.collection = collection
     axios({
       method: "post",
       url: "/api/auth/login",
       data: values,
     })
       .then((res) => {
-        // console.log("submit-email:res", res)
         setLoading(false)
         if (res.status === 200) setMsgSuccess(true)
         else
@@ -68,7 +81,7 @@ export default function AgentLogin() {
       })
       .catch((err) => {
         setLoading(false)
-        // console.log("submit-email:err", err)
+
         setMsgError(
           (err &&
             err.response &&

@@ -42,6 +42,7 @@ export async function POST(request) {
 
     const otp = jwt.sign({ collection, id: user._id }, JWT_SECRET, {
       expiresIn: "5m",
+      algorithm: "HS256",
     })
     await user.updateOne({ otp })
 

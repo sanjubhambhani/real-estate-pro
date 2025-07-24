@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Container, Row, Col } from "react-bootstrap"
+import store from "store"
 
 import ListingFeed from "components/listings/feed.jsx"
 
@@ -10,7 +11,9 @@ export default function Listings() {
   const [listings, setListings] = useState([])
 
   useEffect(() => {
-    fetch("/api/listings")
+    fetch("/api/listings", {
+      headers: { Authorization: store.get("token") || "" },
+    })
       .then((res) => res.json())
       .then((data) => {
         setListings(data)

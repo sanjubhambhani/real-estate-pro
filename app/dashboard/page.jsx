@@ -1,3 +1,6 @@
+"use client"
+
+// import { useEffect, useState } from "react"
 import { Container, Row, Col } from "react-bootstrap"
 
 export default function Dashboard() {

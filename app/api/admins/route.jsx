@@ -38,8 +38,9 @@ export async function POST(request) {
     const admin = await new Admin(payload).save()
 
     const token = jwt.sign(
-      { collection: "admins", id: admin._id.toString() },
-      JWT_SECRET
+      { collection: "admins", id: admin._id.toString(), role: "token" },
+      JWT_SECRET,
+      { algorithm: "HS256" }
     )
     await admin.updateOne({ token })
 
