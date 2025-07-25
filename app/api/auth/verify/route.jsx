@@ -41,7 +41,10 @@ export async function POST(request) {
       return NextResponse.json({ message: "Agent not found" }, { status: 404 })
     if (!user.active)
       return NextResponse.json({ message: "Agent inactive" }, { status: 401 })
-    return NextResponse.json(user, { status: 200 })
+    return NextResponse.json(
+      { user, collection: token.collection },
+      { status: 200 }
+    )
   } catch (err) {
     return NextResponse.json(
       { message: "Something went wrong" },

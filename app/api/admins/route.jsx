@@ -43,13 +43,9 @@ export async function POST(request) {
       { algorithm: "HS256" }
     )
     await admin.updateOne({ token })
-
     // TODO: Email Notification: Admin Invite
 
-    return NextResponse.json(
-      { message: "Admins created successfully" },
-      { status: 201 }
-    )
+    return NextResponse.json(await new Admin(payload).save(), { status: 201 })
   } catch (err) {
     return NextResponse.json(
       { message: "Something went wrong" },

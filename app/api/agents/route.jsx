@@ -44,13 +44,8 @@ export async function POST(request) {
       { algorithm: "HS256" }
     )
     await agent.updateOne({ token })
-
     // TODO: Email Notification: Agent Invite
-
-    return NextResponse.json(
-      { message: "Agent created successfully" },
-      { status: 201 }
-    )
+    return NextResponse.json(agent, { status: 201 })
   } catch (err) {
     return NextResponse.json(
       { message: "Something went wrong" },

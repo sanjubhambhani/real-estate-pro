@@ -23,7 +23,7 @@ export default function AgentLogin() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     if (params.get("email")) setEmail(params.get("email"))
-    if (params.get("collection")) setCollection(params.get("collection"))
+    if (params.get("admin")) setCollection("admins")
 
     const agent = store.get("user:agent")
     if (agent) return router.push("/dashboard")
@@ -43,8 +43,7 @@ export default function AgentLogin() {
     })
       .then((res) => {
         if (res.status === 200) {
-          const user = res.data
-
+          const { user, collection } = res.data
           if (collection == "admins") {
             store.set("user:admin", user)
             router.push("/admin")
@@ -119,12 +118,12 @@ export default function AgentLogin() {
           <Card className="shadow-sm">
             <Card.Body className="p-4 p-md-5 text-center">
               <div className="mb-3">
-                <h4>Agent Login</h4>
+                <h4>{collection == "admins" ? "Admin" : "Agent"} Login</h4>
               </div>
               {display}
               <div className="text-muted small">
                 <p className="m-0">
-                  Need Help? <Link href="#">help@rohito.com</Link>
+                  Need Help? <Link href="#">help@sanjub.com</Link>
                 </p>
               </div>
             </Card.Body>

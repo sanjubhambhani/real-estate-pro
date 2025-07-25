@@ -41,10 +41,14 @@ export async function POST(request) {
     if (!user.active)
       return NextResponse.json({ message: "User inactive" }, { status: 401 })
 
-    const otp = jwt.sign({ collection, id: user._id }, JWT_SECRET, {
-      expiresIn: "5m",
-      algorithm: "HS256",
-    })
+    const otp = jwt.sign(
+      { collection, id: user._id, role: "otp" },
+      JWT_SECRET,
+      {
+        expiresIn: "5m",
+        algorithm: "HS256",
+      }
+    )
     await user.updateOne({ otp })
 
     const loginLink = `${APP_URL}?otp=${otp}`

@@ -11,6 +11,9 @@ export default function Dashboard() {
       <Row>
         <Col xs={12}>
           <h3>Dashboard</h3>
+        </Col>
+
+        <Col xs={12}>
           <ul>
             <li>10 new listings added!</li>
             <li>2 new leads!</li>
@@ -18,12 +21,11 @@ export default function Dashboard() {
         </Col>
 
         <Col xs={12}>
-          <h5>Referral Link</h5>
           <a
             target="_blank"
             href={`/lead?agent=${user && user._id.toString()}`}
           >
-            Link
+            <h5>Referral Link</h5>
           </a>
         </Col>
       </Row>

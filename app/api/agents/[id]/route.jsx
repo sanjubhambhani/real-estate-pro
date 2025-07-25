@@ -10,9 +10,8 @@ export async function GET(request, { params }) {
     const agent = await Agent.findOne({ _id: id })
     if (!agent)
       return NextResponse.json({ message: "Agent not found" }, { status: 404 })
-    return new Response(JSON.stringify(agent), {
-      headers: { "content-type": "application/json" },
-    })
+
+    return NextResponse.json(agent, { status: 200 })
   } catch (err) {
     return NextResponse.json(
       { message: "Something went wrong" },
@@ -32,9 +31,7 @@ export async function PATCH(request, { params }) {
     const data = await request.json()
     await agent.updateOne(data)
 
-    return new Response(JSON.stringify(await Agent.findOne({ _id: id })), {
-      headers: { "content-type": "application/json" },
-    })
+    return NextResponse.json(await Agent.findOne({ _id: id }), { status: 200 })
   } catch (err) {
     return NextResponse.json(
       { message: "Something went wrong" },

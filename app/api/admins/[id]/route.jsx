@@ -10,9 +10,8 @@ export async function GET(request, { params }) {
     const admin = await Admin.findOne({ _id: id })
     if (!admin)
       return NextResponse.json({ message: "Admin not found" }, { status: 404 })
-    return new Response(JSON.stringify(admin), {
-      headers: { "content-type": "application/json" },
-    })
+
+    return NextResponse.json(admin, { status: 200 })
   } catch (err) {
     return NextResponse.json(
       { message: "Something went wrong" },
@@ -32,9 +31,7 @@ export async function PATCH(request, { params }) {
     const data = await request.json()
     await admin.updateOne(data)
 
-    return new Response(JSON.stringify(await ADmin.findOne({ _id: id })), {
-      headers: { "content-type": "application/json" },
-    })
+    return NextResponse.json(await Admin.findOne({ _id: id }), { satus: 200 })
   } catch (err) {
     return NextResponse.json(
       { message: "Something went wrong" },
