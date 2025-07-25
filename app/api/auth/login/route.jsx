@@ -5,9 +5,12 @@ import connectDB from "lib/mongodb"
 import Agent from "models/agent"
 import Admin from "models/admin"
 
+const Mailgun = require("mailgun.js")
+const mailgun = new Mailgun(FormData)
+
 import getConfig from "next/config"
 const { serverRuntimeConfig } = getConfig()
-const { JWT_SECRET } = serverRuntimeConfig
+const { JWT_SECRET, MAILGUN_API_KEY, APP_URL } = serverRuntimeConfig
 
 export async function POST(request) {
   try {
@@ -46,8 +49,21 @@ export async function POST(request) {
     })
     await user.updateOne({ otp })
 
-    // TODO: Email Notification: Agent Dashboard Login Link
-    console.log("MagicLink: ", `http://localhost:3000/?otp=${otp}`)
+    const loginLink = `${APP_URL}?otp=${otp}`
+    if (MAILGUN_API_KEY) {
+      const mg = mailgun.client({ username: "api", key: MAILGUN_API_KEY })
+      mg.messages
+        .create("sanjub.com", {
+          from: `noreply@sanjub.com`,
+          to: user.email,
+          subject: "Dashboard Login Link",
+          text: `Hi ${user.name},\nDashboard Login: ${loginLink}`,
+        })
+        .then((response) => {})
+        .catch((err) => {
+          console.log(err)
+        })
+    }
 
     return NextResponse.json(
       { message: "OTP sent successfully" },

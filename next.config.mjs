@@ -6,7 +6,8 @@ const nextConfig = {
     NOTION_DB_LEADS: process.env.NOTION_DB_LEADS,
     MONGODB_URI: process.env.MONGODB_URI,
     JWT_SECRET: process.env.JWT_SECRET,
-    // MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
+    APP_URL: process.env.APP_URL,
+    MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
   },
   publicRuntimeConfig: {
     NODE_ENV: process.env.NODE_ENV || "production",
