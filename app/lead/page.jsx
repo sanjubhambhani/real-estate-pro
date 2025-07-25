@@ -1,14 +1,16 @@
 "use client"
 
 import axios from "axios"
-import store from "store"
-import { Container, Row, Col, Button } from "react-bootstrap"
+import { Container, Row, Col, Modal, Button } from "react-bootstrap"
 
 import LeadForm from "components/leads/form.jsx"
+import LeadModal from "components/leads/modal"
 import { useEffect, useState } from "react"
 
 export default function Home() {
   const [agent, setAgent] = useState(null)
+  const [showModal, setShowModal] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -16,6 +18,7 @@ export default function Home() {
   }, [])
 
   const submitForm = (values) => {
+    setLoading(true)
     if (agent) values.agent = agent
     axios({
       method: "post",
@@ -23,37 +26,25 @@ export default function Home() {
       data: values,
     })
       .then((res) => {
-        console.log("res", res)
-        alert("thanks!")
-        // setLoading(false)
-        // if (res.status === 200) setMsgSuccess(true)
-        // else
-        //   setMsgError(
-        //     (res && res.data && res.data.message) ||
-        //       "Something went wrong, please try again!"
-        //   )
+        if (res.status == 200) setShowModal("success")
+        else setShowModal("error")
+        setLoading(false)
       })
       .catch((err) => {
-        console.log("err", err)
-        // setLoading(false)
-        // setMsgError(
-        //   (err &&
-        //     err.response &&
-        //     err.response.data &&
-        //     err.response.data.message) ||
-        //     "Something went wrong, please try again!"
-        // )
+        setShowModal("error")
+        setLoading(false)
       })
   }
 
   return (
     <Container fluid>
-      <Row style={{ padding: 20 }}>
-        <Col xs={12} className="mb-3">
-          <h3>New Lead Form</h3>
+      <LeadModal showModal={showModal} setShowModal={setShowModal} />
+      <Row style={{ padding: 15 }}>
+        <Col xs={12} className="mb-3 text-center">
+          <h3>Please fill in the details</h3>
         </Col>
         <Col xs={12}>
-          <LeadForm onSubmit={submitForm} />
+          <LeadForm onSubmit={submitForm} loading={loading} />
         </Col>
       </Row>
     </Container>
