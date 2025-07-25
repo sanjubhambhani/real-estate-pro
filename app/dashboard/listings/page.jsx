@@ -11,8 +11,10 @@ export default function Listings() {
   const [listings, setListings] = useState([])
 
   useEffect(() => {
+    const user = store.get("user:agent")
+    if (!user) return
     fetch("/api/listings", {
-      headers: { Authorization: store.get("token") || "" },
+      headers: { Authorization: user.token },
     })
       .then((res) => res.json())
       .then((data) => {

@@ -22,7 +22,7 @@ function BasicExample() {
               <NavDropdown.Item href="#/dashboard/profile">
                 Profile
               </NavDropdown.Item>
-              <NavDropdown.Item href="#TODO">Log Out</NavDropdown.Item>
+              <NavDropdown.Item href="/logout">Log Out</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

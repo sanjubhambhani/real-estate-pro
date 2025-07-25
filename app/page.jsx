@@ -25,6 +25,11 @@ export default function AgentLogin() {
     if (params.get("email")) setEmail(params.get("email"))
     if (params.get("collection")) setCollection(params.get("collection"))
 
+    const agent = store.get("user:agent")
+    if (agent) return router.push("/dashboard")
+    const admin = store.get("user:admin")
+    if (admin) return router.push("/admin")
+
     const otp = params.get("otp")
     if (otp) submitToken({ otp })
     else setLoading(false)
@@ -39,9 +44,14 @@ export default function AgentLogin() {
       .then((res) => {
         if (res.status === 200) {
           const user = res.data
-          store.set("token", user.token)
-          if (collection == "admins") router.push("/admin")
-          else router.push("/dashboard")
+
+          if (collection == "admins") {
+            store.set("user:admin", user)
+            router.push("/admin")
+          } else {
+            store.set("user:agent", user)
+            router.push("/dashboard")
+          }
         } else {
           setLoading(false)
           setMsgError(

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
+import moment from "moment"
 
 import connectDB from "lib/mongodb"
 import Agent from "models/agent"
@@ -44,6 +45,8 @@ export async function POST(request) {
         { message: "User is not active" },
         { status: 401 }
       )
+
+    await user.updateOne({ lastLogin: moment.now() })
     return NextResponse.json(user, { status: 200 })
   } catch (err) {
     return NextResponse.json(
