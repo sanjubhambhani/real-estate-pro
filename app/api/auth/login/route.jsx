@@ -2,15 +2,13 @@ import { NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
 
 import connectDB from "lib/mongodb"
+import { sendMail } from "lib/mailgun"
 import Agent from "models/agent"
 import Admin from "models/admin"
 
-const Mailgun = require("mailgun.js")
-const mailgun = new Mailgun(FormData)
-
 import getConfig from "next/config"
 const { serverRuntimeConfig } = getConfig()
-const { JWT_SECRET, MAILGUN_API_KEY, APP_URL } = serverRuntimeConfig
+const { JWT_SECRET, APP_URL } = serverRuntimeConfig
 
 export async function POST(request) {
   try {
@@ -50,20 +48,11 @@ export async function POST(request) {
     await user.updateOne({ otp })
 
     const loginLink = `${APP_URL}?otp=${otp}`
-    if (MAILGUN_API_KEY) {
-      const mg = mailgun.client({ username: "api", key: MAILGUN_API_KEY })
-      mg.messages
-        .create("sanjub.com", {
-          from: `noreply@sanjub.com`,
-          to: user.email,
-          subject: "Dashboard Login Link",
-          text: `Hi ${user.name},\nDashboard Login: ${loginLink}`,
-        })
-        .then((response) => {})
-        .catch((err) => {
-          console.log(err)
-        })
-    }
+    await sendMail({
+      to: user.email,
+      subject: "Dashboard Login Link",
+      text: `Hi ${user.name},\n\Dashboard Login Link: ${loginLink}`,
+    })
 
     return NextResponse.json(
       { message: "OTP sent successfully" },
