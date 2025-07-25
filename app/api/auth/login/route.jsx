@@ -52,6 +52,7 @@ export async function POST(request) {
     await user.updateOne({ otp })
 
     const loginLink = `${APP_URL}?otp=${otp}`
+    console.log(loginLink)
     await sendMail({
       to: user.email,
       subject: "Dashboard Login Link",
