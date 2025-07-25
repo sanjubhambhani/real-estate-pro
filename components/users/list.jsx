@@ -26,7 +26,7 @@ export default function UserList({}) {
   const fetchUsers = async () => {
     axios({
       method: "GET",
-      url: `/api/${collection}?limit=1`,
+      url: `/api/${collection}`,
       headers: { Authorization: admin.token },
     })
       .then((res) => {
@@ -50,9 +50,7 @@ export default function UserList({}) {
           hide: () => setNotify(null),
           message: "User created successfully!.",
         })
-
-        let tmp = _.unionBy([res.data], users, "_id")
-        setUsers(tmp)
+        setUsers([res.data, ...users])
       })
       .catch((err) => {
         setLoading(false)
@@ -79,8 +77,9 @@ export default function UserList({}) {
           hide: () => setNotify(null),
           message: "User updated successfully!.",
         })
-        let tmp = _.unionBy([res.data], users, "_id")
-        setUsers(tmp)
+        setUsers((prevUsers) =>
+          prevUsers.map((user) => (user._id === res.data._id ? res.data : user))
+        )
       })
       .catch((err) => {
         setLoading(false)
@@ -121,12 +120,13 @@ export default function UserList({}) {
         />
       )}
       {notify && <Notify payload={notify} />}
-      <Row style={{ marginTop: 40 }}>
+      <Row>
         <Col xs={6}>
-          <h5>Manage {collection}</h5>
+          <h5>Manage Agents</h5>
         </Col>
-        <Col xs={6} style={{ textAlign: "right" }}>
+        <Col xs={6} style={{ textAlign: "right", marginBottom: 10 }}>
           <Button
+            size="md"
             onClick={() => {
               setUser({ active: true })
               setShowModal(true)

@@ -7,6 +7,8 @@ import store from "store"
 import axios from "axios"
 import moment from "moment"
 
+import NavBar from "components/admins/nav"
+
 export default function AdminLayout({ children }) {
   const [loading, setLoading] = useState(true)
 
@@ -42,5 +44,16 @@ export default function AdminLayout({ children }) {
   }
 
   if (loading) return null
-  return <Container fluid>{children}</Container>
+  return (
+    <>
+      <NavBar />
+      <Container
+        fluid
+        className="d-flex min-vh-100 bg-light layout-dashboard"
+        style={{ paddingTop: "80px" }}
+      >
+        {children}
+      </Container>
+    </>
+  )
 }

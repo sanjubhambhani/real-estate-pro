@@ -1,15 +1,17 @@
 "use client"
 
-import { Row, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 
 import UsersList from "components/users/list"
 
 export default function Listings() {
   return (
-    <Row>
-      <Col xs={12}>
-        <UsersList />
-      </Col>
-    </Row>
+    <Container fluid style={{ maxWidth: 1400 }}>
+      <Row>
+        <Col xs={12}>
+          <UsersList />
+        </Col>
+      </Row>
+    </Container>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { Container, Row, Col, Button, Alert } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import store from "store"
 
 export default function Dashboard() {
