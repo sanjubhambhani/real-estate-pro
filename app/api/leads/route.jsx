@@ -9,7 +9,13 @@ const { serverRuntimeConfig } = getConfig()
 const { NOTION_DB_LEADS } = serverRuntimeConfig
 
 export async function GET(request) {
-  const response = await getLeads()
+  const searchParams = request.nextUrl.searchParams
+  const agentID = searchParams.get("agent")
+  const filterAgent = {
+    property: "Agent ID",
+    rich_text: { equals: agentID },
+  }
+  const response = await getLeads(filterAgent)
   return NextResponse.json(response)
 }
 

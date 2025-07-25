@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap"
 import _ from "lodash"
 import ListingCard from "./card.jsx"
 
-export default function ListingFeed({ listings }) {
+export default function ListingList({ listings }) {
   if (!listings.length) return null
 
   return (
@@ -12,7 +12,7 @@ export default function ListingFeed({ listings }) {
       <Row>
         {_.map(listings, (listing) => {
           return (
-            <Col xs={12} lg={6} xl={4} key={listing.id}>
+            <Col xs={12} sm={12} md={6} lg={4} xl={3} key={listing.id}>
               <ListingCard listing={listing} key={listing.id} />
             </Col>
           )

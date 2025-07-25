@@ -16,7 +16,7 @@ const PropertyCard = ({ listing }) => {
   const displayBath = getPropertyValue(listing, "Bathrooms")
   const displaySqFt = getPropertyValue(listing, "Sq. Footage")
   const displayMLS = getPropertyValue(listing, "MLS")
-  const displayDateListed = getPropertyValue(listing, "Date Listed")
+  // const displayDateListed = getPropertyValue(listing, "Date Listed")
   const displayGoogleDrivelink = getPropertyValue(listing, "Google Drive Link")
 
   const displayPriceFormatted = displayPrice
@@ -32,7 +32,7 @@ const PropertyCard = ({ listing }) => {
         borderRadius: 12,
       }}
     >
-      <Row>
+      <Row style={{ padding: 3 }}>
         <Col
           xs={12}
           style={{ display: "flex", justifyContent: "space-between" }}
@@ -46,16 +46,18 @@ const PropertyCard = ({ listing }) => {
             <Badge bg="dark">MLS #{displayMLS}</Badge>
           </div>
         </Col>
-        <Col xs={12} style={{ padding: 20 }}>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h5 style={{ color: "#1976d2", fontWeight: 700 }}>
-              {displayPriceFormatted}
-            </h5>
-            <p>{displayDateListed}</p>
-          </div>
 
-          <p style={{ fontWeight: 600, marginBottom: 10 }}>{displayAddress}</p>
+        <Col xs={12} style={{ padding: 10 }}>
+          <p style={{ fontWeight: 600, margin: 0 }}>{displayAddress}</p>
+        </Col>
 
+        <Col xs={6} style={{ padding: 10 }}>
+          <h5 style={{ color: "#1976d2", fontWeight: 600 }}>
+            {displayPriceFormatted}
+          </h5>
+        </Col>
+
+        <Col xs={6} style={{ paddingBottom: 10 }}>
           <Row>
             <Col
               xs={4}
@@ -68,7 +70,9 @@ const PropertyCard = ({ listing }) => {
                 <FaBed />
               </div>
               <div style={{ fontWeight: 700 }}>{displayBed}</div>
-              <div style={{ fontSize: 12, color: "#757575" }}>Bed</div>
+              <div style={{ fontSize: 12, color: "#757575", display: "none" }}>
+                Bed
+              </div>
             </Col>
             <Col
               xs={4}
@@ -78,17 +82,22 @@ const PropertyCard = ({ listing }) => {
                 <FaBath />
               </div>
               <div style={{ fontWeight: 700 }}>{displayBath}</div>
-              <div style={{ fontSize: 12, color: "#757575" }}>Bath</div>
+              <div style={{ fontSize: 12, color: "#757575", display: "none" }}>
+                Bath
+              </div>
             </Col>
             <Col xs={4} style={{ textAlign: "center" }}>
               <div style={{ fontSize: 16, marginBottom: 4 }}>
                 <FaExpandArrowsAlt />
               </div>
               <div style={{ fontWeight: 700 }}>{displaySqFt || "-"}</div>
-              <div style={{ fontSize: 12, color: "#757575" }}>Sq. Ft.</div>
+              <div style={{ fontSize: 12, color: "#757575", display: "none" }}>
+                Sq. Ft.
+              </div>
             </Col>
           </Row>
         </Col>
+
         <Col xs={12}>
           <ButtonGroup style={{ width: "100%" }}>
             <Button

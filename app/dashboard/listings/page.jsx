@@ -4,10 +4,11 @@ import { useEffect, useState } from "react"
 import { Container, Row, Col } from "react-bootstrap"
 import store from "store"
 
-import ListingFeed from "components/listings/list.jsx"
+import Loader from "components/common/loader"
+import ListingFeed from "components/listings/list"
 
 export default function Listings() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [listings, setListings] = useState([])
 
   useEffect(() => {
@@ -19,27 +20,16 @@ export default function Listings() {
       .then((res) => res.json())
       .then((data) => {
         setListings(data)
-        setIsLoading(false)
+        setLoading(false)
       })
   }, [])
 
-  // TODO: migrate to loading component with spinner.
-  if (isLoading)
-    return (
-      <Container fluid>
-        <Row>
-          <Col xs={12} className="text-center">
-            <h5>loading....</h5>
-          </Col>
-        </Row>
-      </Container>
-    )
-
+  if (loading) return <Loader />
   return (
-    <Container>
+    <Container fluid style={{ maxWidth: 1400 }}>
       <Row>
         <Col xs={12}>
-          <h5>Listings ({listings.length})</h5>
+          <h5>{listings.length ? listings.length : ""} Listings</h5>
         </Col>
         <ListingFeed listings={listings} />
       </Row>

@@ -47,8 +47,8 @@ export default function DashboardLayout({ children }) {
       <NavBar />
       <Container
         fluid
-        className="d-flex min-vh-100 bg-light"
-        style={{ paddingTop: "70px" }}
+        className="d-flex min-vh-100 bg-light layout-dashboard"
+        style={{ paddingTop: "80px" }}
       >
         {children}
       </Container>

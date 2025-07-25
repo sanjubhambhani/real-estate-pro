@@ -1,5 +1,12 @@
 // bootstrap override
-// $primary: #008f00;
+$primary: #1976d2;
 // $secondary: #5e5e5e;
 
 @import "~bootstrap/scss/bootstrap";
+
+.table {
+  thead tr td {
+    background-color: #000;
+    color: #fff;
+  }
+}

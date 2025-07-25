@@ -1,23 +1,16 @@
 "use client"
 
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Button, Alert } from "react-bootstrap"
 import store from "store"
 
 export default function Dashboard() {
   const user = store.get("user:agent")
 
   return (
-    <Container fluid>
+    <Container fluid style={{ maxWidth: 1400 }}>
       <Row>
         <Col xs={12}>
-          <h3>Dashboard</h3>
-        </Col>
-
-        <Col xs={12}>
-          <ul>
-            <li>10 new listings added!</li>
-            <li>2 new leads!</li>
-          </ul>
+          <h5>Dashboard</h5>
         </Col>
 
         <Col xs={12}>
