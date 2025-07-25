@@ -40,10 +40,10 @@ const PropertyCard = ({ listing }) => {
           <div>
             <Badge bg="primary">{displayPurpose}</Badge>
             &nbsp;
-            <Badge bg="primary">{displayType}</Badge>
+            <Badge bg="secondary">{displayType}</Badge>
           </div>
           <div>
-            <Badge bg="secondary">MLS #{displayMLS}</Badge>
+            <Badge bg="dark">MLS #{displayMLS}</Badge>
           </div>
         </Col>
         <Col xs={12} style={{ padding: 20 }}>
@@ -98,13 +98,13 @@ const PropertyCard = ({ listing }) => {
             >
               Google Drive
             </Button>
-            <Button
+            {/* <Button
               variant="outline-primary"
               disabled={!displayGoogleDrivelink}
               onClick={() => window.open(displayGoogleDrivelink)}
             >
               Share Link
-            </Button>
+            </Button> */}
           </ButtonGroup>
         </Col>
       </Row>
