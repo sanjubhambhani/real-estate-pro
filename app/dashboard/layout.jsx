@@ -8,10 +8,10 @@ import store from "store"
 import NavBar from "components/agents/nav"
 
 export default function DashboardLayout({ children }) {
-  useEffect(() => {
-    const token = store.get("token")
-    if (!token) redirect("/")
-  }, [])
+  // useEffect(() => {
+  //   const token = store.get("token")
+  //   if (!token) redirect("/")
+  // }, [])
 
   return (
     <>

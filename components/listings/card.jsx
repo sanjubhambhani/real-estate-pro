@@ -11,13 +11,17 @@ const PropertyCard = ({ listing }) => {
   const displayAddress = getPropertyValue(listing, "Address")
   const displayType = getPropertyValue(listing, "Type")
   const displayPurpose = getPropertyValue(listing, "Purpose")
-  const displayPrice = getPropertyValue(listing, "Price").toLocaleString()
+  const displayPrice = getPropertyValue(listing, "Price")
   const displayBed = getPropertyValue(listing, "Bedrooms")
   const displayBath = getPropertyValue(listing, "Bathrooms")
   const displaySqFt = getPropertyValue(listing, "Sq. Footage")
   const displayMLS = getPropertyValue(listing, "MLS")
   const displayDateListed = getPropertyValue(listing, "Date Listed")
   const displayGoogleDrivelink = getPropertyValue(listing, "Google Drive Link")
+
+  const displayPriceFormatted = displayPrice
+    ? `$${parseFloat(displayPrice).toLocaleString()}`
+    : "-"
 
   return (
     <Card
@@ -45,7 +49,7 @@ const PropertyCard = ({ listing }) => {
         <Col xs={12} style={{ padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <h5 style={{ color: "#1976d2", fontWeight: 700 }}>
-              ${displayPrice}
+              {displayPriceFormatted}
             </h5>
             <p>{displayDateListed}</p>
           </div>
@@ -55,7 +59,10 @@ const PropertyCard = ({ listing }) => {
           <Row>
             <Col
               xs={4}
-              style={{ textAlign: "center", borderRight: "1px solid #eee" }}
+              style={{
+                textAlign: "center",
+                borderRight: "1px solid #eee",
+              }}
             >
               <div style={{ fontSize: 16, marginBottom: 4 }}>
                 <FaBed />
@@ -77,7 +84,7 @@ const PropertyCard = ({ listing }) => {
               <div style={{ fontSize: 16, marginBottom: 4 }}>
                 <FaExpandArrowsAlt />
               </div>
-              <div style={{ fontWeight: 700 }}>{displaySqFt}</div>
+              <div style={{ fontWeight: 700 }}>{displaySqFt || "-"}</div>
               <div style={{ fontSize: 12, color: "#757575" }}>Sq. Ft.</div>
             </Col>
           </Row>

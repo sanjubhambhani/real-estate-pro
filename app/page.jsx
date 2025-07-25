@@ -38,10 +38,10 @@ export default function AgentLogin() {
     })
       .then((res) => {
         if (res.status === 200) {
-          const { user, collection } = res.data
+          const user = res.data
           store.set("token", user.token)
-          if (collection == "agents") router.push("/dashboard")
           if (collection == "admins") router.push("/admin")
+          else router.push("/dashboard")
         } else {
           setLoading(false)
           setMsgError(
